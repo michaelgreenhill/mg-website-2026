@@ -37,7 +37,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ $summary }}">
-<meta property="og:url" content="{{ $permalink }}">
+<meta property="og:url" content="{{ absURL ($permalink) }}">
 <meta property="og:image" content="{{ $image }}">
 {{- if eq .Section $config.blogDir -}}
   {{- $date := .Date.Format "2006-02-01" -}}
