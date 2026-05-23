@@ -10,8 +10,12 @@
   {{- partial "opengraph" . }}
   {{- partialCached "favicon" . }}
   {{- partialCached "styles" . }}
-  <link rel="stylesheet" href="/css/custom.css">
-  <link rel="stylesheet" href="/css/icons.css">
+
+  {{ $style := resources.Get "css/custom.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
+  {{ $style := resources.Get "css/icons.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
