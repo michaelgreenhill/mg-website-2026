@@ -274,3 +274,12 @@ ul.pagination li.page-item.active a {
     font-size: 0.8rem;
     color: #ffffff;
 }
+
+.nav-brand {
+    font-family: "Gabarito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    opacity: 0.5;
+    text-transform: lowercase;
+}
