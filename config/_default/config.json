@@ -1,5 +1,7 @@
 {
     "title": "Michael Greenhill",
+    "locale": "en-AU",
+    "defaultContentLanguage": "en",
     "author": "Michael Greenhill",
     "sectionPagesMenu": "main",
     "theme": [
