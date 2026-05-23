@@ -175,6 +175,11 @@ section.index aside a div {
     width: 100%;
 }
 
+.portfolio.article_meta {
+    background: #111;
+    color: whitesmoke;
+}
+
 div.post-top-content {
     width: 100%;
     display: flex;
