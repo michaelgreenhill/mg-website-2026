@@ -1,0 +1,67 @@
+{{- if .IsPage }}
+    {{ $imgs := findRE "<img.*src=(?:\"|')(.*?)(?:\"|').*?>" .Content 1 }}
+    {{ if $imgs }}
+        {{ $img := index ($imgs) 0 }}
+        {{ $first_img := replaceRE "<img.*src=(?:\"|')(.*?)(?:\"|').*?>" "$1" $img }}
+        {{ if $first_img }}
+            {{ $first_img := $first_img | absURL}}
+            {{ $.Scratch.Set "first_img" $first_img }}
+        {{ end }}
+    {{ end }}
+{{ end -}}
+
+{{ $fontPath := "fonts/IMFeENrm28P.ttf" }}
+{{ $imagePath := "og-image/bg.jpeg" }}
+{{ $filter := "" }}
+{{ $r := "" }}
+{{ $text := .Title }}
+{{ $font := resources.Get $fontPath }}
+{{ with $r = resources.Get $imagePath }}
+  {{ $opts := dict
+    "alignx" "left"
+    "aligny" "bottom"
+    "color" "#ffffff"
+    "font" $font
+    "linespacing" 8
+    "size" 80
+    "x" 10
+    "y" (sub .Height 25)
+  }}
+  {{ $filter = images.Text $text $opts }}
+{{ end }}
+
+
+
+{{ $firstImage := index (.Resources.ByType "image") 0 }}
+{{ if $firstImage }}
+<meta property="og:image" content="{{ $firstImage.Permalink }}" />
+{{ end }}
+
+{{- with $.Params.images -}}
+  {{- range first 6 . }}
+    <meta property="og:image" content="{{ . | absURL }}" />
+  {{ end -}}
+{{- else -}}
+  {{- with $.Params.photo -}}
+    <meta property="og:image" content="{{ . | absURL }}" />
+  {{- else -}}
+    {{- $images := $.Resources.ByType "image" -}}
+    {{- $featured := $images.GetMatch "*feature*" -}}
+    {{- if not $featured }}
+      {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}
+    {{ end -}}
+    {{- with $featured -}}
+      <meta property="og:image" content="{{ $featured.Permalink }}"/>
+    {{- else -}}
+      {{- with $.Scratch.Get "first_img" }}
+        <meta property="og:image" content="{{ . }}"/>
+      {{- else -}}
+        {{ with $r }}
+          {{ with . | images.Filter $filter }}
+            <meta property="og:image" content="{{ .Permalink }}"/>
+          {{ end }}
+        {{ end }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
