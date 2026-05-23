@@ -1,0 +1,31 @@
+<footer class="footer wrap pale">
+  <p>&copy;&nbsp;<span class="year"></span>&nbsp;{{ site.Title }}</p>
+  <p class="attribution upcase">{{ safeHTML (T "designed_by" site.Data.designer) }}</p>
+{{- range site.Menus.footer }}
+  <a href="{{ .URL }}">
+    {{ .Name }}
+    {{- with .Page }}
+      {{- with .Params.version -}}
+        ({{ . }})
+      {{- end }}
+    {{- end }}
+  </a>
+{{- end }}
+
+</footer>
+{{ $scriptPath := "js/index.js" }}
+{{ $scripts := resources.Get $scriptPath | resources.ExecuteAsTemplate $scriptPath . | resources.Minify | resources.Fingerprint "sha512" }}
+<script src="{{ $scripts.Permalink }}"></script>
+<!-- lazy loading of images -->
+
+{{ $js := resources.Get "js/lazyload.js" | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+
+
+<script>
+// tell the script what class to look for
+var lazyLoad = new LazyLoad({
+  elements_selector: ".lazyload",
+  cancel_on_exit: true
+});
+</script>

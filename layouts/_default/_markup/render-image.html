@@ -1,0 +1,90 @@
+{{- $sizes := slice "320" "640" "960" "1280" "1600" "1920" -}}
+{{- $alt := .Text -}}
+{{- $title := "" -}}
+{{- if .Title }}{{ $title = .Title }}{{ else }}{{ $title = .Text }}{{ end -}}
+{{- $src := .Destination -}}
+{{- $webpOpts := "webp q90 mitchellNetravali"}}
+{{- $imgClass := "image-processed" -}}
+{{- $image_ext := path.Ext .Destination -}}
+
+<div class="image-container">
+  <picture>
+    <a href="{{ $src | safeURL }}"
+      target="_blank"
+      rel="noopener noreferrer">
+
+  {{ if .Page.Resources.GetMatch $src }}
+    {{ with .Page.Resources.GetMatch $src }}
+      {{ $image := . }}
+      {{ if (strings.HasSuffix $image_ext "gif") -}}
+        {{ $placeholder := ($image.Resize "128x q20") | images.Filter (images.GaussianBlur 2) }}
+        <noscript>
+          <img
+            class="post-gif"
+            src="{{ $image.RelPermalink }}"
+            {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+            {{- if $title -}} title="{{ $title }}" {{ end }}
+            loading="lazy"
+          />
+        </noscript>
+        
+        <img
+          class="post-gif lazyload show-if-js"
+          srcset="data:image/gif;base64,{{ $placeholder.Content | base64Encode }}"
+          data-sizes="auto"
+          data-srcset="{{ $image.RelPermalink }} {{ $image.Width }}w"
+          data-src="{{ $image.RelPermalink }}"
+          width="{{ $image.Width }}"
+          height="{{ $image.Height }}"
+          {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+          {{- if $title -}} title="{{ $title }}" {{ end }}
+          loading="lazy"
+        />
+      {{- else -}}
+        {{ $src_set := "" }}
+        {{ with $sizes }}
+          {{ range $i, $e := . }}
+            {{ if ge $image.Width . }}
+              {{ $resized := $image.Resize (print . "x " $webpOpts ) }}
+              {{ if $i }}{{ $src_set = (print $src_set ", " ) }}{{ end }}
+              {{ $src_set = (print $src_set $resized.RelPermalink " " . "w") }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ $fallback := $image.Resize (print $image.Width "x " $webpOpts ) }}
+        {{ $src_set = (print $src_set ", " $fallback.RelPermalink " " $image.Width "w") }}
+        {{ $placeholder := ($image.Resize "128x q20") | images.Filter (images.GaussianBlur 1)}}
+        <noscript>
+          <img 
+            class="post-image"
+            {{ printf "srcset=%q" $src_set | safeHTMLAttr }}
+            src="{{ $fallback.RelPermalink }}"
+            {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+            {{- if $title -}} title="{{ $title }}" {{ end }}
+            loading="lazy"
+          />
+        </noscript>
+
+        <img
+          class="post-image lazyload show-if-js"
+          {{ printf "data-srcset=%q" $src_set | safeHTMLAttr }}
+          data-src="{{ $image.RelPermalink }}"
+          src="data:image/webp;base64,{{ $placeholder.Content | base64Encode }}"
+          data-sizes="auto"
+          width="{{ $image.Width }}"
+          height="{{ $image.Height }}"
+          {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+          {{- if $title -}} title="{{ $title }}" {{ end }}
+          loading="lazy"
+        />
+      {{- end -}}
+    {{ end }}
+  {{- else -}}
+    {{- /* present unprocessed/remote images too */ -}}
+    <img class="post-image unprocessed" src="{{ .Destination | safeURL }}" alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" decoding="async" />
+  {{- end -}}
+    </a>
+  </picture>
+  {{ with .Title }}<p class="image-caption">{{ . | $.Page.RenderString }}</p>{{ end }}
+</div>

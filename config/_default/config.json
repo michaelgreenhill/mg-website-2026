@@ -1,0 +1,44 @@
+{
+    "title": "Michael Greenhill",
+    "author": "Michael Greenhill",
+    "sectionPagesMenu": "main",
+    "theme": [
+        "newsroom",
+        "hugo-shortcode-gallery"
+    ],
+    "params": {
+        "gallerydeluxe": {
+            "shuffle": false,
+            "reverse": false,
+            "enable_exif": false
+        },
+        "imageSizes": [
+            850,
+            710,
+            300
+        ],
+        "imageSizeString": "(max-width: 850px) 850w, (max-width: 710px) 710w, (max-width: 300px) 300w"
+    },
+    "imaging": {
+        "includeFields": "*",
+        "anchor": "smart",
+        "bgColor": "ffffff",
+        "compression": "lossy",
+        "quality": 90,
+        "resampleFilter": "box",
+        "webp": {
+            "hint": "photo",
+            "method": 2,
+            "useSharpYuv": false
+        },
+        "meta": {
+            "fields": [
+                "**"
+            ],
+            "sources": [
+                "exif",
+                "iptc"
+            ]
+        }
+    }
+}

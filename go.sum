@@ -1,0 +1,7 @@
+github.com/future-wd/hugo-imaging-common/v2 v2.0.1/go.mod h1:8Y1N0MdvYLhV9T8+E0px/m6sHc8FiGFKvWIHMk9ZGVo=
+github.com/future-wd/hugo-responsive-images v1.4.5 h1:+NMXOmHdCQfvXaHEtaPlFCzpE3tavUzWuWj+WcLWZhM=
+github.com/future-wd/hugo-responsive-images v1.4.5/go.mod h1:ZPwYLgG1rA+6G+fwpYclcT1AEesnJ8/XV+frmrescYw=
+github.com/mfg92/hugo-shortcode-gallery v1.4.0 h1:QS6L448HSnMSJwnH4HY+euTemuK1Dsq6lfYIRU8cLV4=
+github.com/mfg92/hugo-shortcode-gallery v1.4.0/go.mod h1:SEdbeBGSMX2lP+4nCqqy9AyTWWktUMWXYnR3r1l01Rw=
+github.com/onweru/newsroom v0.0.0-20260312180854-22bccb8c2b75 h1:MNvErnyVFyPYSN42vnXoTvTpFdG3E6VOMmb6kUsmlVo=
+github.com/onweru/newsroom v0.0.0-20260312180854-22bccb8c2b75/go.mod h1:CnPS3gSJseLHZMhLLbxe+qDzR54HQ7s5RaLujOkejuM=

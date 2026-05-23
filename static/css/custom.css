@@ -1,0 +1,150 @@
+.gallery-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery-container p {
+    margin-bottom: 1rem;
+}
+
+.gallery-item {
+    max-width: 1024px;
+    width: 100%;
+}
+
+.gallery-container>section {}
+
+.gallery-img {
+    text-align: center;
+    background: #212124;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.gallery-img picture img {
+    max-height: calc(100vh - 4rem);
+    width: 100%;
+    object-fit: contain;
+}
+
+.gallery-title {
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+.gallery-title h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.gallery-description-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.gallery-description-block summary.gallery-summary {
+    order: 1;
+    flex-grow: 1;
+}
+
+.gallery-description-block time {
+    display: block;
+    font-size: 1rem;
+}
+
+.gallery-description-block aside.gallery-info {
+    order: 2;
+    flex-shrink: 0;
+    min-width: 400px;
+    max-width: 400px;
+    width: 400px;
+    background: #dddddd;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+aside.gallery-info ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+aside.gallery-info li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 calc((100% / 2) - 1rem);
+}
+
+aside.gallery-info li.aside-fullwidth {
+    flex: 0 0 100%;
+}
+
+aside.gallery-info .gallery-icon {
+    font-size: 2rem;
+}
+
+aside.gallery-info li span {
+    display: block;
+}
+
+.gallery-license {}
+
+body {
+    margin: 0px;
+    max-width: 100%;
+}
+
+.gallery-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    margin: 0 0 2rem 0;
+}
+
+.index-container {
+    height: calc(100vh - 200px);
+}
+
+section.index {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    padding-top: 100px;
+    height: calc(100vh - 150px);
+    gap: 1rem;
+    padding: 100px 1rem 0 1rem;
+}
+
+section.index aside {
+    flex-grow: 1;
+    display: flex;
+    width: 50%;
+}
+
+section.index aside a {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+}
+
+section.index aside a div {
+    width: 100%;
+}

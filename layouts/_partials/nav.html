@@ -1,0 +1,12 @@
+<div class="nav-drop">
+  <div class="nav-body">
+    {{- range site.Menus.main }}
+      <a {{ with .Params.class -}} class="{{ . }}" {{ end -}} href="{{ .URL }}">
+        {{ .Name }}
+      </a>
+    {{- end }}
+    <div class="nav-close"></div>
+    {{- partialCached "mode" . }}
+  </div>
+</div>
+{{- partialCached "header" . }}

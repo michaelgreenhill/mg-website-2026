@@ -1,0 +1,196 @@
+{{ define "main" }}
+{{- $sizes := slice "800" "960" "1024" "1280" "1920" -}}
+{{- $webpOpts := "webp q90 mitchellNetravali"}}
+{{- $imgClass := "image-processed" -}}
+
+
+<article itemscope itemType="https://schema.org/BlogPosting">
+
+
+
+    <main itemprop="articleBody" class="md gallery-container mt-2 pt-2">
+
+
+    <section class="gallery-header">
+        <div class="gallery-item">
+            {{ block "content" . }}
+            <div>
+                <h1 class="post_title">{{ .Title }}</h1>
+                {{- .Content }}
+            </div>
+            {{- end }}
+        </div>
+    </section>
+
+    {{ $images := sort (.Resources.ByType "image") "Meta.Date" "desc" }}
+    {{ range $images }}
+        
+        {{- $src := .RelPermalink  -}}
+        {{- $alt := .Meta.Exif.ImageDescription }}
+        {{- $title := .Meta.IPTC.ObjectName }}
+        {{- $image_ext := path.Ext .RelPermalink  -}}
+
+        <section class='gallery-img'>
+            <div class="gallery-item">
+                {{ $image := .Fit "1024x1024" }}
+                <!--<figure>//-->
+                    <!-- <img src="{{ $image.RelPermalink }}" alt="{{ .Meta.Exif.ImageDescription }}">//-->
+                <!--</figure>//-->
+
+
+                <div class="image-container">
+                <picture>
+                    <a href="{{ $src | safeURL }}"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    {{ $image := . }}
+                    {{ if (strings.HasSuffix $image_ext "gif") -}}
+                        {{ $placeholder := ($image.Resize "128x q20") | images.Filter (images.GaussianBlur 2) }}
+                        <noscript>
+                        <img
+                            class="post-gif"
+                            src="{{ $image.RelPermalink }}"
+                            {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+                            {{- if $title -}} title="{{ $title }}" {{ end }}
+                            loading="lazy"
+                        />
+                        </noscript>
+                        
+                        <img
+                        class="post-gif lazyload show-if-js"
+                        srcset="data:image/gif;base64,{{ $placeholder.Content | base64Encode }}"
+                        data-sizes="auto"
+                        data-srcset="{{ $image.RelPermalink }} {{ $image.Width }}w"
+                        data-src="{{ $image.RelPermalink }}"
+                        width="{{ $image.Width }}"
+                        height="{{ $image.Height }}"
+                        {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+                        {{- if $title -}} title="{{ $title }}" {{ end }}
+                        loading="lazy"
+                        />
+                    {{- else -}}
+                        {{ $src_set := "" }}
+                        {{ with $sizes }}
+                        {{ range $i, $e := . }}
+                            {{ if ge $image.Width . }}
+                            {{ $resized := $image.Resize (print . "x " $webpOpts ) }}
+                            {{ if $i }}{{ $src_set = (print $src_set ", " ) }}{{ end }}
+                            {{ $src_set = (print $src_set $resized.RelPermalink " " . "w") }}
+                            {{ end }}
+                        {{ end }}
+                        {{ end }}
+
+                        {{ $fallback := $image.Resize (print $image.Width "x " $webpOpts ) }}
+                        {{ $src_set = (print $src_set ", " $fallback.RelPermalink " " $image.Width "w") }}
+                        {{ $placeholder := ($image.Resize "128x q20") | images.Filter (images.GaussianBlur 1)}}
+                        <noscript>
+                        <img 
+                            class="post-image"
+                            {{ printf "srcset=%q" $src_set | safeHTMLAttr }}
+                            src="{{ $fallback.RelPermalink }}"
+                            {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+                            {{- if $title -}} title="{{ $title }}" {{ end }}
+                            loading="lazy"
+                        />
+                        </noscript>
+
+                        <img
+                        class="post-image lazyload show-if-js"
+                        {{ printf "data-srcset=%q" $src_set | safeHTMLAttr }}
+                        data-src="{{ $image.RelPermalink }}"
+                        src="data:image/webp;base64,{{ $placeholder.Content | base64Encode }}"
+                        data-sizes="auto"
+                        width="{{ $image.Width }}"
+                        height="{{ $image.Height }}"
+                        {{- if $alt -}} alt="{{ $alt }}" {{ end }}
+                        {{- if $title -}} title="{{ $title }}" {{ end }}
+                        loading="lazy"
+                        />
+                    {{- end -}}
+                    </a>
+                </picture>
+                </div>
+
+            </div>
+        </section>
+            
+        <section class='gallery-license'>
+            <div class="gallery-item">
+                {{ if isset .Params "license" }}
+                    {{ partial "cc-license.html" (dict "license" .Params.license "title" $image.Title "workURL" $.Page.Permalink "author" $.Site.Params.Author "authorURL" $.Site.BaseURL) }}
+                {{ else }}
+                    {{ with $.Site.Params.photolicense }}
+                    {{ partial "cc-license.html" (dict "license" $.Site.Params.photolicense "title" $image.Title "workURL" $.Page.Permalink "author" $.Site.Params.Author "authorURL" $.Site.BaseURL) }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
+
+        <section class='gallery-title'>
+            <div class="gallery-item gallery-description-block">
+                <summary class='gallery-summary'>
+                    {{ with .Meta }}
+                    <h2>{{ .IPTC.ObjectName }}</h2>
+                    <p>{{ .Exif.ImageDescription | replaceRE "\n" "<br>" | safeHTML }}</p>
+                    {{ end }}
+                </summary>
+                <aside class='gallery-info'>
+                    {{ with .Meta }}
+                    
+                    <ul>
+                        <li class="aside-fullwidth">
+                            <i class='material-symbols-light--date-range-outline gallery-icon'></i>
+                            {{ $t := time.AsTime .Date }}
+                            <strong><time datetime="{{ .Date }}">{{ time.Format "January 2, 2006" $t }}</time></strong>
+                        </li>
+                        <li>
+                            <i class='ph--aperture-light gallery-icon'></i>
+                            <span>ƒ{{printf "%.1f" .Exif.ApertureValue }}</span>
+                        </li>
+                        <li>
+                            <i class='fluent--arrow-fit-20-regular gallery-icon'></i>
+                            <span>{{ .Exif.FocalLength }}mm</span>
+                        </li>
+                        <li>
+                            <i class='ph--timer-light gallery-icon'></i>
+                            <span>{{ .Exif.ExposureTime }}</span>
+                        </li>
+                        <li>
+                            <i class='carbon--iso-outline gallery-icon'></i>
+                            <span>{{ .Exif.ISO }}</span>
+                        </li>
+                        {{ with (eq .Exif.Flash 0) }}
+                        <li>
+                            <i class='material-symbols-light--flash-off-outline gallery-icon'></i>
+                            <span>Off, did not fire</span>
+                        </li>
+                        {{ end }}
+                        {{ with (gt .Exif.Flash 0) }}
+                        <li>
+                            <i class='material-symbols-light--flash-on-outline gallery-icon'></i>
+                            <span>Fired</span>
+                        </li>
+                        {{ end }}
+                        <li>
+                            <i class='material-symbols-light--pin-drop-outline-rounded gallery-icon'></i>
+                            <span><a href="https://www.google.com/maps/search/?api=1&query={{ with (eq .Exif.GPSLatitudeRef `S`) }}-{{ end }}{{ .Exif.GPSLatitude }}%2C{{ with (eq .Exif.GPSLongitudeRef `W`) }}-{{ end }}{{ .Exif.GPSLongitude }}" target="_blank">{{ .IPTC.City }}, {{ index .IPTC "Province-State" }}</a></span>
+                        </li>
+                    </ul>
+                    {{ end }}
+
+                </aside>
+            </div>
+        </section>
+        </div>
+
+    {{ end }}
+
+    </main>
+
+</article>
+{{- end }}
+
+{{ define "header" }}
+{{- partial "header" . -}}
+{{ end }}

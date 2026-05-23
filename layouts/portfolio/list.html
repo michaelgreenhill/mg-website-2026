@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article>
+    <main itemprop="articleBody" class="wrap mt-2 pt-2">
+        <section>
+            <h1>{{ .Title }}</h1>
+            {{.Content}}
+        </section>
+        <section>
+            <div class="grid-2 article_showcase">
+                {{ range .Pages.GroupByDate "Jan 2006" }}
+                {{ range .Pages }}
+                <article class="article mb-2">
+                    <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+                        {{ $firstImage := index (.Resources.ByType "image") 0 }}
+                        {{ $firstImage = $firstImage.Fit "480x480" }}
+                        <div class="article_thumb" style="background-image: url({{ $firstImage.RelPermalink }})"></div>
+                        <div class="article_meta ">
+                            <time class="post_date">February 05, 2023</time>
+                            <h3 class="article_title">{{ .LinkTitle }}</h3>
+                            <div class="article_excerpt">
+                            <p>{{ .Description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {{ end }}
+                {{ end }}
+            </div>
+        </section>
+    </main>
+</article>
+{{- end }}
+
+{{ define "header" }}
+{{- partial "header" . -}}
+{{ end }}
