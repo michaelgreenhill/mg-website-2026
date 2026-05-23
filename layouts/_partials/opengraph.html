@@ -19,7 +19,7 @@
 {{ $image := "" }}
 {{ $firstImage := index (.Resources.ByType "image") 0 }}
 {{ if $firstImage }}
-  {{ $image = $firstImage.Permalink }}
+  {{ $image = absURL ($firstImage.Permalink) }}
 {{ else }}
 
   {{- with .Params.image }}
