@@ -15,6 +15,9 @@ date: 2020-01-09
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /making-my-homelab-smarter-part-4/
+draft: false
 ---
 
 Up until now, this series has been focusing on pfSense, but there's more to a homelab than a router. I know, *controversial*.

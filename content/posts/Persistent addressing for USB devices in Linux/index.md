@@ -15,6 +15,9 @@ date: 2022-04-22
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /persistent-addressing-for-usb-devices-in-linux/
+draft: false
 ---
 
 So I've decided that I just have way too much free time and, therefore, should dive head-first into home automation. I'm also a tightarse.

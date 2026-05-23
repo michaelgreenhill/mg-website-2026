@@ -148,3 +148,70 @@ section.index aside a {
 section.index aside a div {
     width: 100%;
 }
+
+div.heroimage {
+    margin: 0;
+    background: #333;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 1.5em;
+    text-align: center;
+    background-size: cover;
+}
+
+div.heroimage>div {
+    background: rgba(0, 0, 0, .8);
+    overflow: hidden;
+}
+
+div.heroimage>div>img {
+    margin: 0;
+    max-height: 40vh;
+}
+
+div.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+ul.pagination {
+    display: flex;
+    width: 200px;
+    margin: auto;
+    gap: 0.5rem;
+}
+
+ul.pagination li {
+    flex: 1;
+    width: 4rem;
+}
+
+ul.pagination li.page-item a {
+    background: #dddddd;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+ul.pagination li.page-item.disabled a {
+    background: #dddddd;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: #999999;
+}
+
+ul.pagination li.page-item.active a {
+    background: #333333;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: #ffffff;
+}

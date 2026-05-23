@@ -13,6 +13,9 @@ date: 2023-02-05
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /homelab-revisited/
+draft: false
 ---
 
 Way back in early 2020 I started documenting my misadventures in homelabbing, also known as *quick and easy ways to annoy your spouse*. Over the course of 2020 the lab evolved little thanks the one-two suckerpunch of COVID and lethargy, but opportunity came knocking one morning in September when a giant gum tree destroyed half the house, forcing an impromptu rennovation.

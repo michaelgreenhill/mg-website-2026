@@ -16,6 +16,9 @@ date: 2020-05-09
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /instrumenting-autoscaling-ec2-instances-in-prometheus/
+draft: false
 ---
 
 Prometheus is time series database use for metrics and alerting. Coupled with Grafana it's my go-to solution for instrumenting metrics for Linux/Windows/SNMP devices.

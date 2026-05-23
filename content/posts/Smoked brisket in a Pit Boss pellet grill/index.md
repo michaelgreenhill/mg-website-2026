@@ -20,6 +20,9 @@ ingredients: |-
   * (about) 1 tablespoon of freshly ground coarse pepper,
   * 1 tablespoon of smoked paprika,
   * 1 tablespoon of sweet paprika.
+aliases:
+  - /smoked-brisket-in-a-pit-boss-pellet-grill/
+draft: false
 ---
 
 Since moving into my place in the hills nine years ago I've been interested in smoking large chunks of meats. Over the years I've had varying levels of success, but the common concept theme throughout has been the use of second-hand or downright hillbilly smokers.

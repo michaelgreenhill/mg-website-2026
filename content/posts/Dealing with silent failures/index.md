@@ -15,6 +15,9 @@ date: 2020-05-05
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /dealing-with-silent-failures/
+draft: false
 ---
 
 ## Living on hopes and prayers

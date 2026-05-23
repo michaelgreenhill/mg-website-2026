@@ -12,6 +12,9 @@ date: 2020-02-16
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /night-photography-part-1/
+draft: false
 ---
 
 *This is a rehash of my presentation at the Railway Photography Forum at the Powerhouse Museum, back in 2018.*

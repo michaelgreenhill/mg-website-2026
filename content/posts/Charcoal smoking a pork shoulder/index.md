@@ -24,6 +24,8 @@ ingredients: |-
   * 1 tablespoon of sweet paprika,
   * 1/2 tablespoon of freshly ground coarse pepper,
   * 1/2 tablespoon of gunpowder spice
+aliases:
+  - /charcoal-smoking-a-pork-shoulder/
 ---
 
 Continuing on with my calamitous barbeque odyssey, in late Jan I smoked a big ol chunk of pork shoulder for pulled pork.

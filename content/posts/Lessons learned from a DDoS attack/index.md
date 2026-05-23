@@ -14,6 +14,9 @@ date: 2020-02-22
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /lessons-learned-from-a-ddos-attack/
+draft: false
 ---
 
 One of our brands recently suffered a DDoS attack - thankfully not a sustained one, but enough to impact website availability and rethink our defensive strategies.

@@ -14,6 +14,9 @@ date: 2020-02-19
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /cloudflare-is-it-worth-it/
+draft: false
 ---
 
 So this website is still in its infancy. Less than a week old, in fact.

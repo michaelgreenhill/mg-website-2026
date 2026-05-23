@@ -14,6 +14,9 @@ date: 2020-01-08
 author: 
   name: Michael Greenhill
   photo: "https://s3-ap-southeast-2.amazonaws.com/michaelgreenhill-net/cdn/2020/02/download.png"
+aliases:
+  - /making-my-homelab-smarter-part-3/
+draft: false
 ---
 
 Let's recap. Back in [Part 1](/making-my-homelab-smarter-part-1), I had a proper grumble about ADSL and routers. In [Part 2](/making-my-homelab-smarter-part-2) we enjoyed a good chat about multi-WAN (load balancing, failover) and policy-based routing.
