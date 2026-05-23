@@ -1,6 +1,5 @@
 <footer class="footer wrap pale">
   <p>&copy;&nbsp;<span class="year"></span>&nbsp;{{ site.Title }}</p>
-  <p class="attribution upcase">{{ safeHTML (T "designed_by" site.Data.designer) }}</p>
 {{- range site.Menus.footer }}
   <a href="{{ .URL }}">
     {{ .Name }}
@@ -12,6 +11,9 @@
   </a>
 {{- end }}
 
+</footer>
+<footer class="footer wrap pale center">
+  <p>The views on this website are entirely my own and do not reflect those of my employer, my country, or the small alien that controls this flesh prison.</p>
 </footer>
 {{ $scriptPath := "js/index.js" }}
 {{ $scripts := resources.Get $scriptPath | resources.ExecuteAsTemplate $scriptPath . | resources.Minify | resources.Fingerprint "sha512" }}

@@ -6,6 +6,12 @@
         "newsroom",
         "hugo-shortcode-gallery"
     ],
+    "menus": {
+        "main": [{
+            "name": "Tags",
+            "pageRef": "/tags"
+        }]
+    },
     "params": {
         "gallerydeluxe": {
             "shuffle": false,
