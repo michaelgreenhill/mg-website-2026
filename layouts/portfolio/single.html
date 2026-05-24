@@ -177,6 +177,18 @@
                             <i class='material-symbols-light--pin-drop-outline-rounded gallery-icon'></i>
                             <span><a href="https://www.google.com/maps/search/?api=1&query={{ with (eq .Exif.GPSLatitudeRef `S`) }}-{{ end }}{{ .Exif.GPSLatitude }}%2C{{ with (eq .Exif.GPSLongitudeRef `W`) }}-{{ end }}{{ .Exif.GPSLongitude }}" target="_blank">{{ .IPTC.City }}, {{ index .IPTC "Province-State" }}</a></span>
                         </li>
+                        <li class="aside-fullwidth">
+                            <svg viewBox="0 0 64 64">
+                                <use href="/images/cc-icons-by.svg"></use>
+                            </svg>
+                            <svg viewBox="0 0 64 64">
+                                <use href="/images/cc-icons-nc.svg"></use>
+                            </svg>
+                            <svg viewBox="0 0 64 64">
+                                <use href="/images/cc-icons-nd.svg"></use>
+                            </svg>
+                            <span><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en" target="_blank">CC BY-NC-ND 4.0</a></span>
+                        </li>
                     </ul>
                     {{ end }}
 
@@ -188,6 +200,10 @@
     {{ end }}
 
     </main>
+
+        <div class="portfolio_copyright">
+            <p>All images are licensed under Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en" target="_blank">Attribution-NonCommercial-NoDerivatives 4.0 International</a>.</p>
+        </div>
 
 </article>
 {{- end }}

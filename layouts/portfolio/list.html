@@ -9,11 +9,33 @@
             <div class="grid-2 article_showcase">
                 {{ range .Pages.GroupByDate "Jan 2006" }}
                 {{ range .Pages }}
-                <article class="article mb-2">
+                <article class="article">
+                    {{ $heroImage := index (.Resources.Match "images/hero*") 0 }}
+                    {{ $coverImage := $heroImage.Fit "480x480" }}
+
+                    {{ if eq $heroImage nil }}
+                    {{ $firstImage := index (.Resources.ByType "image") 0 }}
+                    {{ $coverImage = $firstImage.Fit "480x480" }}
+                    {{ end }}
+
+                    <a href="{{ .RelPermalink }}" title="{{ .Title }}" class="portfolio_card" style="background-image: url({{ $coverImage.RelPermalink }})">
+                        <div class="portfolio_meta">
+                            <h3 class="article_title">{{ .LinkTitle }}</h3>
+                            <div class="article_excerpt">
+                                <p>{{ .Description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <!--
                     <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+                        {{ $heroImage := index (.Resources.Match "images/hero*") 0 }}
+                        {{ $coverImage := $heroImage.Fit "480x480" }}
+
+                        {{ if eq $heroImage nil }}
                         {{ $firstImage := index (.Resources.ByType "image") 0 }}
-                        {{ $firstImage = $firstImage.Fit "480x480" }}
-                        <div class="article_thumb" style="background-image: url({{ $firstImage.RelPermalink }})"></div>
+                        {{ $coverImage = $firstImage.Fit "480x480" }}
+                        {{ end }}
+                        <div class="article_thumb" style="background-image: url({{ $coverImage.RelPermalink }})"></div>
                         <div class="portfolio article_meta ">
                             <h3 class="article_title">{{ .LinkTitle }}</h3>
                             <div class="article_excerpt">
@@ -21,11 +43,16 @@
                             </div>
                         </div>
                     </a>
+                    //-->
                 </article>
                 {{ end }}
                 {{ end }}
             </div>
         </section>
+
+        <div class="portfolio_copyright mt-2">
+            <p>All images are licensed under Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en" target="_blank">Attribution-NonCommercial-NoDerivatives 4.0 International</a>.</p>
+        </div>
     </main>
 </article>
 {{- end }}

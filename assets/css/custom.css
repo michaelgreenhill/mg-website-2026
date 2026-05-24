@@ -126,6 +126,22 @@ aside.gallery-info li span {
     display: block;
 }
 
+aside.gallery-info li svg {
+    display: inline;
+    height: 2em;
+    width: 2em;
+    vertical-align: text-bottom;
+}
+
+.portfolio_copyright {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.portfolio_copyright a {
+    color: var(--theme);
+}
+
 .gallery-license {}
 
 body {
@@ -175,8 +191,40 @@ section.index aside a div {
     width: 100%;
 }
 
+.portfolio_card {
+    display: grid;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    height: 16rem;
+    background-size: cover;
+    background-position: 50% 60%;
+    align-items: end;
+}
+
+.portfolio_meta {
+    background: rgba(0, 0, 0, 0.5);
+    color: whitesmoke;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+}
+
+.portfolio_meta p {
+    margin-bottom: 0;
+}
+
+.portfolio_card:hover .article_excerpt:not(.visible) {
+    height: 40px;
+    opacity: 1;
+}
+
+.portfolio_card:hover .portfolio_meta {
+    background: rgba(0, 0, 0, 0.8);
+    transition: background-color 0.2s ease-in-out;
+}
+
 .portfolio.article_meta {
-    background: #111;
+    background: rgba(0, 0, 0, 0.8);
     color: whitesmoke;
 }
 
